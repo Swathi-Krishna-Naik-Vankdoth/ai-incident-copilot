@@ -1,0 +1,28 @@
+ESCALATION POLICY - INCIDENT RESPONSE
+======================================
+
+SEV-1 (Critical) - Full outage or data loss
+- Response time: 15 minutes
+- Owner: On-call Engineering Lead
+- Actions: Page on-call engineer, notify VP Engineering, start war room
+- Stakeholder update: Every 30 minutes
+- Escalate to: CTO if unresolved after 1 hour
+
+SEV-2 (High) - Major feature broken, no workaround
+- Response time: 1 hour
+- Owner: Team Lead + Product Manager
+- Actions: Assign engineer, notify Director, post in #incidents Slack
+- Stakeholder update: Every 2 hours
+- Escalate to: VP Engineering if unresolved after 4 hours
+
+SEV-3 (Medium) - Minor issue, workaround exists
+- Response time: 4 hours
+- Owner: Assigned engineer
+- Actions: Create ticket, notify team lead
+- Stakeholder update: Daily
+- Escalate to: Team Lead if unresolved after 2 days
+
+LEGAL REVIEW REQUIRED FOR:
+- Any change affecting user data or privacy
+- New third-party partner integrations
+- Changes to terms of service or billing

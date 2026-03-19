@@ -1,0 +1,32 @@
+INCIDENT RESPONSE SOP - FIRST 30 MINUTES
+==========================================
+
+IMMEDIATE ACTIONS (0-5 minutes)
+- Acknowledge the alert in monitoring system
+- Post in #incidents Slack channel: "Investigating [issue description]"
+- Assign incident commander (on-call lead)
+- Start incident timer
+
+ASSESSMENT (5-15 minutes)
+- Identify affected systems and user impact
+- Check error rates, latency, and data pipeline status
+- Classify severity (Sev-1 / Sev-2 / Sev-3)
+- Page additional engineers if Sev-1
+
+CONTAINMENT (15-30 minutes)
+- Attempt quick fix or rollback if cause is known
+- Enable feature flags to disable broken functionality
+- Reroute traffic if infrastructure issue
+- Notify partner teams if upstream/downstream systems affected
+
+COMMUNICATION RULES
+- Sev-1: Update stakeholders every 30 minutes
+- Sev-2: Update stakeholders every 2 hours
+- Sev-3: Update stakeholders once daily
+- Always include: what happened, impact, current status, next update time
+
+POST-INCIDENT (after resolution)
+- Write incident report within 24 hours
+- Document root cause and timeline
+- List action items to prevent recurrence
+- Share learnings with broader team

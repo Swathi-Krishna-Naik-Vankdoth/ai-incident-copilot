@@ -1,0 +1,30 @@
+PRODUCT LAUNCH CHECKLIST
+=========================
+
+PRE-LAUNCH (1 week before)
+- [ ] Legal review completed for any user data changes
+- [ ] Privacy policy updated if needed
+- [ ] Load testing completed - system handles 2x expected traffic
+- [ ] Rollback plan documented and tested
+- [ ] Feature flags configured for gradual rollout
+- [ ] Monitoring and alerting set up for new features
+- [ ] On-call engineer assigned for launch week
+
+PRE-LAUNCH (24 hours before)
+- [ ] Staging environment sign-off from Product and Engineering
+- [ ] Partner teams notified (data, infra, support)
+- [ ] Launch comms drafted (internal + external)
+- [ ] Incident response plan reviewed with team
+- [ ] Database migration scripts tested
+
+LAUNCH DAY
+- [ ] Deploy during low-traffic window
+- [ ] Monitor error rates for first 2 hours
+- [ ] Confirm KPIs are tracking correctly
+- [ ] Support team briefed on known issues
+
+LEGAL REVIEW REQUIRED FOR:
+- New partner integrations accessing user data
+- Changes to payment or billing systems
+- New data collection or retention policies
+- Features targeting users under 18
