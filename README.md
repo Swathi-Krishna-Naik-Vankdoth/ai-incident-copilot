@@ -5,7 +5,9 @@ AI-powered decision-support system for program, engineering, and operations team
 Built as an end-to-end product with a FastAPI backend, Claude-powered intelligence, and a lightweight UI for business users.
 
 🔗 **Live Demo:** https://ai-incident-copilot.onrender.com/app/
+
 📚 **API Docs:** https://ai-incident-copilot.onrender.com/docs
+
 👤 **Author:** Swathi Krishna
 
 ---
