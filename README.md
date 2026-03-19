@@ -45,14 +45,14 @@ This project demonstrates how AI can move beyond generic chat and support real o
 
 In incident-heavy operational environments, the first phase of response is consistently slowed by fragmented information, manual triage, and inconsistent communication across functions.
 
-Across every role, teams face the same friction:
+Across incident workflows, teams face the same friction:
 
 - **Program Managers** spend time searching through SOPs and escalation policies under time pressure
 - **Engineering Leads** triage severity from incomplete or unstructured notes
 - **Product Managers** convert fragmented Slack threads and status updates into leadership communication
 - **Operations Teams** context-switch between monitoring tools, policy documents, and communication channels simultaneously
-- **Executive Stakeholders** wait on structured updates while the team is heads-down on resolution
-
+- **Executive Stakeholders** wait on structured updates while teams are still gathering the facts
+  
 The result across all phases:
 
 - slower incident response
@@ -114,6 +114,8 @@ Takes raw, unstructured incident notes and returns a structured executive update
 ---
 
 ## Architecture
+
+The application routes three operational workflows through a FastAPI backend and Claude-powered reasoning layer:
 
 ```
 User Input (question / incident description / raw notes)
@@ -224,7 +226,7 @@ ai-incident-copilot/
 │   └── index.html                ← Lightweight UI for business users
 ├── agent.py                      ← FastAPI backend + Claude API integration
 ├── requirements.txt
-├── Procfile                      ← Render / Railway deployment config
+├── Procfile                      ← Render deployment config
 ├── .env.example                  ← Environment variable template
 └── README.md
 ```
@@ -318,5 +320,6 @@ The last question should return "insufficient context" — demonstrating grounde
 - Applying LLMs to structured business workflows rather than generic chat experiences
 - Implementing guardrails — source citation, "insufficient context" responses, confidence notes
 - Deploying a live, accessible application on cloud infrastructure
+- Operates at the intersection of business operations, AI systems, and software engineering
 
 *Built at the intersection of business operations, AI systems, and software engineering.*
