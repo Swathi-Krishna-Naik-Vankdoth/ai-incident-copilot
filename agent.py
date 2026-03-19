@@ -6,6 +6,7 @@
 
 import os
 import anthropic
+from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -133,3 +134,4 @@ Use this exact structure:
 @app.get("/")
 def root():
     return {"status": "Copilot is running", "endpoints": ["/ask", "/classify", "/draft-update"]}
+app.mount("/app", StaticFiles(directory="frontend", html=True), name="frontend")
