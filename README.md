@@ -286,7 +286,7 @@ The last question should return "insufficient context" — demonstrating grounde
 ## Screenshots
 
 ### Live UI
-![API Overview](assets/Screenshot1_api.png)
+![API Overview](assets/Screenshot1_Live_UI.png)
 
 ### Document Q&A — grounded answers with source citation
 ![Ask](assets/Screenshot2_ask.png)
