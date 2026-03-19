@@ -31,19 +31,9 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .result-box { background: #f9f9f9; border-radius: 8px; padding: 14px 16px; font-size: 13px; line-height: 1.7; }
     .result-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #888; margin-bottom: 8px; }
-    .result-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f0f0f0; align-items: flex-start; }
-    .result-row:last-child { border-bottom: none; }
-    .result-key { font-size: 12px; color: #666; font-weight: 500; min-width: 140px; flex-shrink: 0; }
-    .result-val { font-size: 13px; color: #1a1a1a; flex: 1; line-height: 1.5; }
-    .sev-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 20px; }
-    .sev-1 { background: #fef2f2; color: #dc2626; }
-    .sev-2 { background: #fffbeb; color: #d97706; }
-    .sev-3 { background: #f0fdf4; color: #16a34a; }
     .insight { padding: 12px 14px; border-radius: 8px; margin-bottom: 8px; background: #f0fdf4; border-left: 3px solid #16a34a; }
-    .insight-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
-    .insight-body { font-size: 13px; color: #555; line-height: 1.5; }
+    .insight-body { font-size: 13px; color: #1a1a1a; line-height: 1.7; white-space: pre-wrap; }
     .error { background: #fef2f2; border-left: 3px solid #dc2626; padding: 12px 14px; border-radius: 8px; font-size: 13px; color: #991b1b; line-height: 1.6; }
-    code { background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
     .phase { display: none; }
     .phase.active { display: block; }
   </style>
@@ -141,9 +131,8 @@
         <div class="card">
           <h2>Answer</h2>
           <div class="insight">
-            <div class="insight-body">${r.answer || r.response || JSON.stringify(r)}</div>
+            <div class="insight-body">${r.answer || JSON.stringify(r)}</div>
           </div>
-          ${r.source ? `<div style="font-size:12px;color:#888;margin-top:8px">Source: ${r.source}</div>` : ''}
         </div>`;
     } catch(err) {
       out.innerHTML = `<div class="card"><div class="error"><b>Something went wrong</b><br><br>${err.message}</div></div>`;
@@ -165,23 +154,16 @@
       const res = await fetch(`${API}/classify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ incident_description: incident })
+        body: JSON.stringify({ description: incident })  // ✅ FIXED
       });
       if (!res.ok) throw new Error(`Server error ${res.status}: ${await res.text()}`);
       const r = await res.json();
-      const sevNum = (r.severity || '').replace('Sev-', '');
-      const sevClass = sevNum === '1' ? 'sev-1' : sevNum === '2' ? 'sev-2' : 'sev-3';
       out.innerHTML = `
         <div class="card">
-          <h2 style="display:flex;align-items:center;gap:10px">
-            Classification Result
-            <span class="sev-badge ${sevClass}">${r.severity || 'Unknown'}</span>
-          </h2>
+          <h2>Classification Result</h2>
           <div class="result-box">
-            <div class="result-row"><div class="result-key">Severity</div><div class="result-val"><span class="sev-badge ${sevClass}">${r.severity || 'N/A'}</span></div></div>
-            <div class="result-row"><div class="result-key">Likely owner</div><div class="result-val">${r.likely_owner || r.owner || 'N/A'}</div></div>
-            <div class="result-row"><div class="result-key">Recommended action</div><div class="result-val">${r.recommended_next_action || r.next_action || 'N/A'}</div></div>
-            <div class="result-row"><div class="result-key">Confidence note</div><div class="result-val">${r.confidence_note || r.confidence || 'N/A'}</div></div>
+            <div class="result-label">AI-generated severity assessment</div>
+            <div class="insight-body">${r.classification || JSON.stringify(r)}</div>
           </div>
         </div>`;
     } catch(err) {
@@ -204,7 +186,7 @@
       const res = await fetch(`${API}/draft-update`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ raw_notes: notes })
+        body: JSON.stringify({ notes: notes })  // ✅ FIXED
       });
       if (!res.ok) throw new Error(`Server error ${res.status}: ${await res.text()}`);
       const r = await res.json();
@@ -213,10 +195,7 @@
           <h2>Stakeholder Update</h2>
           <div class="result-box">
             <div class="result-label">AI-generated · edit before sending</div>
-            <div class="result-row"><div class="result-key">Issue summary</div><div class="result-val">${r.issue_summary || 'N/A'}</div></div>
-            <div class="result-row"><div class="result-key">Business impact</div><div class="result-val">${r.business_impact || 'N/A'}</div></div>
-            <div class="result-row"><div class="result-key">Mitigation plan</div><div class="result-val">${r.mitigation_plan || 'N/A'}</div></div>
-            <div class="result-row"><div class="result-key">Next checkpoint</div><div class="result-val">${r.next_checkpoint || 'N/A'}</div></div>
+            <div class="insight-body">${r.update || JSON.stringify(r)}</div>
           </div>
         </div>`;
     } catch(err) {
